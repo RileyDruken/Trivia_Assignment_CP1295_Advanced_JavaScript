@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="script.js"></script>
   </head>
 
   <body>
@@ -17,6 +18,7 @@
     </div>
 
     <main>
+
       <h1>Fallout Trivia</h1> 
 
       <!-- SCORE DISPLAY -->
@@ -24,18 +26,34 @@
         SCORE: <span id="scoreValue">0</span>
       </div>
 
-      <!-- Single Trivia Card -->
-      <div id="triviaCard">
-        <h2 id="questionTitle">Question Title Placeholder</h2>
-        <p id="questionText">This is a placeholder for the trivia question.</p>
+      <!-- IMAGE + CARD LAYOUT -->
+      <div id="layoutRow">
 
-        <ul id="answerList">
-          <li><button class="answerButton">Answer Option Placeholder 1</button></li>
-          <li><button class="answerButton">Answer Option Placeholder 2</button></li>
-          <li><button class="answerButton">Answer Option Placeholder 3</button></li>
-          <li><button class="answerButton">Answer Option Placeholder 4</button></li>
-        </ul>
+        <!-- Left Image -->
+        <div class="sideImageBox">
+          <img id="leftImage" src="" alt="Left image placeholder">
+        </div>
+
+        <!-- Trivia Card -->
+        <div id="triviaCard">
+          <h2 id="questionTitle">Question Title Placeholder</h2>
+          <p id="questionText">This is a placeholder for the trivia question.</p>
+
+          <ul id="answerList">
+            <li><button class="answerButton">Answer Option Placeholder 1</button></li>
+            <li><button class="answerButton">Answer Option Placeholder 2</button></button></li>
+            <li><button class="answerButton">Answer Option Placeholder 3</button></li>
+            <li><button class="answerButton">Answer Option Placeholder 4</button></li>
+          </ul>
+        </div>
+
+        <!-- Right Image -->
+        <div class="sideImageBox">
+          <img id="rightImage" src="" alt="Right image placeholder">
+        </div>
+
       </div>
+
     </main>
 
   </body>
