@@ -1,0 +1,202 @@
+/* ===== FALLOUT NEW VEGAS TERMINAL CRT BACKGROUND ===== */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Press Start 2P", cursive;
+  color: #7bff7b;
+  background-color: #010f01;
+  background-size: 200% 200%;
+  overflow: hidden;
+}
+
+/* ===== VIGNETTE + CURVE EFFECT ===== */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+
+  background: radial-gradient(
+    circle at center,
+    rgba(0, 0, 0, 0) 55%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+
+  mix-blend-mode: multiply;
+}
+
+/* ===== TRIVIA CARD - TERMINAL STYLE ===== */
+#triviaCard {
+  background: rgba(0, 30, 0, 0.35);
+  border: 2px solid rgba(0, 255, 70, 0.4);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  border-radius: 6px;
+  padding: 20px;
+  max-width: 700px;
+  margin: 0 auto;
+
+  box-shadow:
+    0 0 12px rgba(0, 255, 70, 0.2),
+    inset 0 0 12px rgba(0, 255, 70, 0.2);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #9aff9a;
+  text-shadow: 0 0 6px rgba(0, 255, 70, 0.8);
+}
+
+/* ===== TEXT ===== */
+#questionTitle {
+  color: #9aff9a;
+  text-shadow: 0 0 5px rgba(0, 255, 70, 0.7);
+  font-size: 18px;
+}
+
+#questionText {
+  color: #7bff7b;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ===== ANSWER LIST ===== */
+#answerList {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+#answerList li {
+  margin-bottom: 10px;
+}
+
+/* Fallout Terminal Style Button */
+.answerButton {
+  width: 100%;
+  padding: 12px 10px;
+  font-family: "Press Start 2P", cursive;
+  font-size: 12px;
+
+  color: #7bff7b;
+  background: rgba(0, 30, 0, 0.25);
+  border: 1px solid rgba(0, 255, 70, 0.25);
+  border-radius: 4px;
+
+  text-shadow: 0 0 4px rgba(0,255,70,0.4);
+
+  transition: 0.15s ease;
+}
+
+/* Hover = Fallout terminal glow */
+.answerButton:hover {
+  background: rgba(0, 255, 70, 0.15);
+  border-color: #00ff46;
+  box-shadow: 0 0 10px rgba(0, 255, 70, 0.7);
+  transform: scale(1.02);
+  cursor: pointer;
+}
+
+/* ===== FALLOUT NV INTRO SCREEN ===== */
+#introScreen {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, #0a1f0a, #030a03 80%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 99999;
+  animation: introFadeOut 2.5s ease forwards;
+  animation-delay: 2.5s;
+}
+
+/* Intro text */
+#introText {
+  color: #7bff7b;
+  font-size: 22px;
+  text-shadow:
+    0 0 4px rgba(0,255,70,0.7),
+    0 0 12px rgba(0,255,70,0.5);
+  letter-spacing: 3px;
+  animation: introBlink 1.4s infinite steps(1);
+}
+
+/* Subtle CRT vertical scanlines */
+#introScreen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background: repeating-linear-gradient(
+    to right,
+    rgba(0, 255, 70, 0.07) 0,
+    rgba(0, 255, 70, 0.07) 2px,
+    rgba(0, 0, 0, 0.2) 3px,
+    rgba(0, 0, 0, 0.2) 4px
+  );
+
+  animation: introScan 0.05s infinite;
+}
+
+/* Animations */
+@keyframes introScan {
+  0% { opacity: 0.13; }
+  50% { opacity: 0.18; }
+  100% { opacity: 0.13; }
+}
+
+@keyframes introBlink {
+  0% { opacity: 1; }
+  50% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+@keyframes introFadeOut {
+  0%   { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+/* ===== CENTER ENTIRE PAGE CONTENT ===== */
+main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== SCORE BOX ===== */
+#scoreBox {
+  margin-bottom: 25px;
+  padding: 10px 18px;
+
+  background: rgba(0, 30, 0, 0.35);
+  border: 2px solid rgba(0, 255, 70, 0.4);
+
+  display: inline-block;
+  font-size: 14px;
+  color: #9aff9a;
+
+  border-radius: 6px;
+  text-shadow: 0 0 5px rgba(0,255,70,0.7);
+
+  box-shadow:
+    0 0 12px rgba(0, 255, 70, 0.2),
+    inset 0 0 12px rgba(0, 255, 70, 0.2);
+
+  letter-spacing: 2px;
+}
+
+/* Score number glow effect */
+#scoreValue {
+  color: #7bff7b;
+  text-shadow:
+    0 0 6px rgba(0,255,70,0.9),
+    0 0 14px rgba(0,255,70,0.5);
+  padding-left: 8px;
+}
