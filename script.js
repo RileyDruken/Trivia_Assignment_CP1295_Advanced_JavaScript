@@ -1,4 +1,4 @@
-import { question } from "./questions_lib.js";
+import { question, generateQuestion } from "./questions_lib.js";
 
 document.addEventListener("DOMContentLoaded", (evt) => {
   let questions = []
@@ -18,13 +18,7 @@ document.addEventListener("DOMContentLoaded", (evt) => {
   questions.push(new question("In Fallout 4, what is the name of the giant sea creature encountered near Spectacle Island?",["Behemoth", "Fog Crawler", "Sharkclaw", "Mirelurk Queen"],"Mirelurk Queen",1))
   questions.push(new question("In Fallout: New Vegas, which casino is controlled by The Chairmen?",["The Tops", "Gomorrah", "Ultra-Luxe", "Bison Steve"],"The Tops",1))
   
-  let gameQuestions = []
-  let workingArray = questions.slice();
-  for (let index = 0; index < 10; index++) {
-    let selected = Math.floor(Math.random() * workingArray.length);
-    gameQuestions.push(workingArray[selected]);
-    workingArray = workingArray.filter((question) => question != workingArray[selected]);
-  }
+  let gameQuestions = generateQuestion(questions);
 
   gameQuestions.forEach(element => {
     console.log(element)

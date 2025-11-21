@@ -10,3 +10,14 @@ export class question {
         this.pointValue = pointValue;
     }
 }
+
+let generateQuestion = (questionsPoll) => {
+    let gameQuestions = []
+    let workingArray = questionsPoll.slice();
+    for (let index = 0; index < 10; index++) {
+        let selected = Math.floor(Math.random() * workingArray.length);
+        gameQuestions.push(workingArray[selected]);
+        workingArray = workingArray.filter((question) => question != workingArray[selected]);
+    }
+    return gameQuestions;
+}
