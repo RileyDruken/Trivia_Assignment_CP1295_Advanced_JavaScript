@@ -2,8 +2,11 @@ import { question } from "./questions_lib.js";
 
 document.addEventListener("DOMContentLoaded", (evt) => {
   let questions = []
-  let exampleQuestion = question;
-  console.log(exampleQuestion)
+  questions.push(new question("In Fallout: New Vegas, what is the name of the town where the Courier begins their journey after being dug out of a shallow grave?",["Primm", "Novac", "Goodsprings", "Sloan"],"Goodsprings",1))
+  
+  questions.forEach(element => {
+    console.log(element)
+  });
 
   document.querySelectorAll("#answerList li button").forEach(element => {
     element.addEventListener("click", (evt) => {
