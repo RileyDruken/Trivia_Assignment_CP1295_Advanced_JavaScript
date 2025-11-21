@@ -11,7 +11,7 @@ export class question {
     }
 }
 
-let generateQuestion = (questionsPoll) => {
+export let generateQuestion = (questionsPoll) => {
     let gameQuestions = []
     let workingArray = questionsPoll.slice();
     for (let index = 0; index < 10; index++) {
