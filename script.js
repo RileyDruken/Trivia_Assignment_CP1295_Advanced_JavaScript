@@ -1,6 +1,7 @@
 import { question, generateQuestion } from "./questions_lib.js";
 
 document.addEventListener("DOMContentLoaded", (evt) => {
+  // I feel there is a better way to do this FIXME:
   let questions = []
   questions.push(new question("In Fallout: New Vegas, what is the name of the town where the Courier begins their journey after being dug out of a shallow grave?",["Primm", "Novac", "Goodsprings", "Sloan"],"Goodsprings",1))
   questions.push(new question("In Fallout: New Vegas, what was The Platinum Chip?",["An Upgrade for Mr.House's Computers/Defense System","An High Value Casinio Chip uses in the Atomic Wrangler","An Upgrade for the Power Armour","An map for the whole wasteland"],"A Upgrade for Mr.House's Computers/Defense System",1))
@@ -19,6 +20,20 @@ document.addEventListener("DOMContentLoaded", (evt) => {
   questions.push(new question("In Fallout: New Vegas, which casino is controlled by The Chairmen?",["The Tops", "Gomorrah", "Ultra-Luxe", "Bison Steve"],"The Tops",1))
   
   let gameQuestions = generateQuestion(questions);
+
+  let initialQuestion = gameQuestions[Math.floor(Math.random() * gameQuestions.length)];
+  gameQuestions = gameQuestions.filter((curQuestion) => curQuestion != initialQuestion);
+
+  document.getElementById("questionTitle").textContent = initialQuestion.question;
+  initialQuestion.options.forEach(element => {
+    let questionItem = document.createElement("li")
+    let button = document.createElement("button");
+    button.setAttribute("Class","answerButton");
+    button.textContent = element;
+    questionItem.appendChild(button)
+    document.getElementById("answerList").appendChild(questionItem)
+  });
+  
 
   gameQuestions.forEach(element => {
     console.log(element)
