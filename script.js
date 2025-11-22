@@ -21,27 +21,36 @@ document.addEventListener("DOMContentLoaded", (evt) => {
   
   let gameQuestions = generateQuestion(questions);
 
-  let initialQuestion = gameQuestions[Math.floor(Math.random() * gameQuestions.length)];
-  gameQuestions = gameQuestions.filter((curQuestion) => curQuestion != initialQuestion);
+  function nextQuestion(questions) {
+    let title = document.getElementById("questionTitle")
+    let answerList = document.getElementById("answerList")
 
-  document.getElementById("questionTitle").textContent = initialQuestion.question;
-  initialQuestion.options.forEach(element => {
-    let questionItem = document.createElement("li")
-    let button = document.createElement("button");
-    button.setAttribute("Class","answerButton");
-    button.textContent = element;
-    questionItem.appendChild(button)
-    document.getElementById("answerList").appendChild(questionItem)
-  });
-  
 
-  gameQuestions.forEach(element => {
-    console.log(element)
-  });
+    title.textContent = "";
+    answerList.textContent = "";
+
+    let currentQuestion = gameQuestions[Math.floor(Math.random() * gameQuestions.length)];
+    questions = questions.filter((curQuestion) => curQuestion != currentQuestion);
+    title.textContent = currentQuestion.question;
+
+    currentQuestion.options.forEach(element => {
+      let questionItem = document.createElement("li")
+      let button = document.createElement("button");
+      button.setAttribute("Class","answerButton");
+      button.textContent = element;
+      button.value = element;
+      questionItem.appendChild(button)
+      answerList.appendChild(questionItem)
+    });
+    return questions
+  }
+
+  gameQuestions = nextQuestion(gameQuestions);
+  console.log(gameQuestions)
 
   document.querySelectorAll("#answerList li button").forEach(element => {
     element.addEventListener("click", (evt) => {
-        console.log("I was clicked")
+        console.log(element.value)
     })
   });
 });
