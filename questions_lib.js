@@ -9,6 +9,10 @@ export class question {
         this.answer = answer;
         this.pointValue = pointValue;
     }
+
+    isAnswer(selected) {
+        return selected == this.answer;
+    }
 }
 
 export let generateQuestion = (questionsPoll) => {
