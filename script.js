@@ -79,6 +79,7 @@ document.addEventListener("DOMContentLoaded", (evt) => {
     let opt3 = document.getElementById("opt3").value
     let opt4 = document.getElementById("opt4").value
     let correctAnswer = document.getElementById("correctAnswer").value
+    let submissionStatus =  document.getElementById("submissionStatus");
 
     console.log(newQuestionText)
     console.log(opt1)
@@ -86,10 +87,25 @@ document.addEventListener("DOMContentLoaded", (evt) => {
     console.log(opt3)
     console.log(opt4)
     console.log(correctAnswer)
-    questions.push(new question(newQuestionText, [opt1, opt2, opt3, opt4], correctAnswer, 1))
 
+    let questionToAdd = new question(newQuestionText, [opt1, opt2, opt3, opt4], correctAnswer, 1);
+    let duplicateFound = false;
+
+    for (let index = 0; index < questions.length; index++) {
+      if (JSON.stringify(questionToAdd) == JSON.stringify(questions[index])) {
+        console.log("duplicate Found")
+        duplicateFound = true;
+        break
+      }
+    }
+    if (!duplicateFound) {
+      questions.push(questionToAdd)
+      submissionStatus.textContent = "Question Added";
+    } else {
+      submissionStatus.textContent = "Question Already Exists"
+    }
     
-    
+
   })
 
   generateCard()
@@ -106,6 +122,7 @@ document.addEventListener("DOMContentLoaded", (evt) => {
       document.getElementById("scoreValue").textContent = score;
       document.getElementById("finalResultSection").className = "hidden";
       generateCard()
+      
   })
 
 

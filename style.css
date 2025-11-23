@@ -327,3 +327,20 @@ input::placeholder {
   0% { opacity: 0; transform: scale(0.9); }
   100% { opacity: 1; transform: scale(1); }
 }
+
+.status-message {
+  margin-top: 15px;
+  font-size: 10px;
+  text-align: center;
+  min-height: 1.5em; /* Keeps space so layout doesn't jump */
+  text-shadow: 0 0 4px rgba(0, 255, 70, 0.4);
+}
+
+.status-success {
+  color: #7bff7b; /* Standard Terminal Green */
+}
+
+.status-error {
+  color: #ff7b7b; /* Terminal Red/Alert */
+  text-shadow: 0 0 4px rgba(255, 70, 70, 0.6);
+}
