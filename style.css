@@ -6,7 +6,7 @@ body {
   color: #7bff7b;
   background-color: #010f01;
   background-size: 200% 200%;
-  overflow: hidden;
+  overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 /* ===== VIGNETTE + CURVE EFFECT ===== */
@@ -15,14 +15,13 @@ body::after {
   position: fixed;
   inset: 0;
   pointer-events: none;
-
   background: radial-gradient(
     circle at center,
     rgba(0, 0, 0, 0) 55%,
     rgba(0, 0, 0, 0.4) 100%
   );
-
   mix-blend-mode: multiply;
+  z-index: 1000;
 }
 
 /* ===== TRIVIA CARD - TERMINAL STYLE ===== */
@@ -31,12 +30,10 @@ body::after {
   border: 2px solid rgba(0, 255, 70, 0.4);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-
   border-radius: 6px;
   padding: 20px;
-  max-width: 700px;
-  margin: 0 auto;
-
+  width: 100%;
+  max-width: 600px;
   box-shadow:
     0 0 12px rgba(0, 255, 70, 0.2),
     inset 0 0 12px rgba(0, 255, 70, 0.2);
@@ -44,16 +41,19 @@ body::after {
 
 h1 {
   text-align: center;
-  margin-bottom: 25px;
+  margin: 25px 0;
   color: #9aff9a;
   text-shadow: 0 0 6px rgba(0, 255, 70, 0.8);
+  font-size: 24px;
+  line-height: 1.5;
 }
 
 /* ===== TEXT ===== */
 #questionTitle {
   color: #9aff9a;
   text-shadow: 0 0 5px rgba(0, 255, 70, 0.7);
-  font-size: 18px;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 /* ===== ANSWER LIST ===== */
@@ -67,25 +67,22 @@ h1 {
   margin-bottom: 10px;
 }
 
-/* Fallout Terminal Style Button */
-.answerButton {
+/* Fallout Terminal Style Button (Shared Class) */
+.answerButton, .terminal-btn {
   width: 100%;
   padding: 12px 10px;
   font-family: "Press Start 2P", cursive;
   font-size: 12px;
-
   color: #7bff7b;
   background: rgba(0, 30, 0, 0.25);
   border: 1px solid rgba(0, 255, 70, 0.25);
   border-radius: 4px;
-
   text-shadow: 0 0 4px rgba(0,255,70,0.4);
-
   transition: 0.15s ease;
+  text-transform: uppercase;
 }
 
-/* Hover = Fallout terminal glow */
-.answerButton:hover {
+.answerButton:hover, .terminal-btn:hover {
   background: rgba(0, 255, 70, 0.15);
   border-color: #00ff46;
   box-shadow: 0 0 10px rgba(0, 255, 70, 0.7);
@@ -93,7 +90,7 @@ h1 {
   cursor: pointer;
 }
 
-/* ===== FALLOUT NV INTRO SCREEN ===== */
+/* ===== INTRO SCREEN ===== */
 #introScreen {
   position: fixed;
   inset: 0;
@@ -101,13 +98,11 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-
   z-index: 99999;
   animation: introFadeOut 2.5s ease forwards;
   animation-delay: 2.5s;
 }
 
-/* Intro text */
 #introText {
   color: #7bff7b;
   font-size: 22px;
@@ -118,13 +113,11 @@ h1 {
   animation: introBlink 1.4s infinite steps(1);
 }
 
-/* Subtle CRT vertical scanlines */
 #introScreen::before {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-
   background: repeating-linear-gradient(
     to right,
     rgba(0, 255, 70, 0.07) 0,
@@ -132,11 +125,9 @@ h1 {
     rgba(0, 0, 0, 0.2) 3px,
     rgba(0, 0, 0, 0.2) 4px
   );
-
   animation: introScan 0.05s infinite;
 }
 
-/* Animations */
 @keyframes introScan {
   0% { opacity: 0.13; }
   50% { opacity: 0.18; }
@@ -155,81 +146,201 @@ h1 {
   100% { opacity: 0; visibility: hidden; }
 }
 
-/* ===== CENTER ENTIRE PAGE CONTENT ===== */
+/* ===== MAIN LAYOUT ===== */
 main {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-/* ===== SCORE BOX ===== */
 #scoreBox {
   margin-bottom: 25px;
   padding: 10px 18px;
-
   background: rgba(0, 30, 0, 0.35);
   border: 2px solid rgba(0, 255, 70, 0.4);
-
   display: inline-block;
   font-size: 14px;
   color: #9aff9a;
-
   border-radius: 6px;
   text-shadow: 0 0 5px rgba(0,255,70,0.7);
-
-  box-shadow:
-    0 0 12px rgba(0, 255, 70, 0.2),
-    inset 0 0 12px rgba(0, 255, 70, 0.2);
-
+  box-shadow: 0 0 12px rgba(0, 255, 70, 0.2), inset 0 0 12px rgba(0, 255, 70, 0.2);
   letter-spacing: 2px;
 }
 
-/* Score number glow effect */
 #scoreValue {
   color: #7bff7b;
-  text-shadow:
-    0 0 6px rgba(0,255,70,0.9),
-    0 0 14px rgba(0,255,70,0.5);
+  text-shadow: 0 0 6px rgba(0,255,70,0.9), 0 0 14px rgba(0,255,70,0.5);
   padding-left: 8px;
 }
 
-/* ===== HORIZONTAL LAYOUT FOR IMAGES + CARD ===== */
+/* ===== LAYOUT ROW (Responsive) ===== */
 #layoutRow {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 25px;
   margin-top: 10px;
+  width: 100%;
+  max-width: 1200px;
 }
 
-/* ===== IMAGE BOX (styled like a terminal window) ===== */
 .sideImageBox {
   width: 200px;
   height: 200px;
-
   background: rgba(0, 30, 0, 0.35);
   border: 2px solid rgba(0, 255, 70, 0.4);
   border-radius: 6px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
-  box-shadow:
-    0 0 12px rgba(0, 255, 70, 0.2),
-    inset 0 0 12px rgba(0, 255, 70, 0.2);
-
+  box-shadow: 0 0 12px rgba(0, 255, 70, 0.2), inset 0 0 12px rgba(0, 255, 70, 0.2);
   padding: 8px;
+  flex-shrink: 0; /* Prevent shrinking on small screens */
 }
 
-/* ===== IMAGES INSIDE BOX ===== */
 .sideImageBox img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-
   filter: drop-shadow(0 0 6px rgba(0,255,70,0.6));
   opacity: 0.9;
+}
+
+/* ===== NEW: FORM STYLING ===== */
+#addQuestionContainer {
+  margin-top: 40px;
+  width: 100%;
+  max-width: 700px;
+  background: rgba(0, 30, 0, 0.35);
+  border: 2px dashed rgba(0, 255, 70, 0.3);
+  padding: 20px;
+  border-radius: 6px;
+}
+
+#addQuestionContainer h2 {
+  font-size: 14px;
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #9aff9a;
+  text-shadow: 0 0 5px rgba(0, 255, 70, 0.7);
+}
+
+.form-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+label {
+  font-size: 10px;
+  color: #7bff7b;
+}
+
+input[type="text"], select {
+  background: rgba(0, 15, 0, 0.8);
+  border: 1px solid #00ff46;
+  color: #7bff7b;
+  font-family: "Press Start 2P", cursive;
+  font-size: 10px;
+  padding: 10px;
+  outline: none;
+  box-shadow: inset 0 0 5px rgba(0, 255, 70, 0.3);
+}
+
+input::placeholder {
+  color: rgba(123, 255, 123, 0.4);
+}
+
+/* ===== RESPONSIVE MEDIA QUERY ===== */
+@media (max-width: 900px) {
+  #layoutRow {
+    flex-direction: column;
+  }
+
+  .sideImageBox {
+    width: 100px;
+    height: 100px;
+    /* Optional: Hide one or both images on very small screens if needed */
+  }
+
+  /* Make the trivia card take up available space */
+  #triviaCard {
+    width: 90%; 
+  }
+
+  h1 {
+    font-size: 18px;
+  }
+}
+
+/* ===== FINAL RESULT SECTION ===== */
+.hidden {
+  display: none !important;
+}
+
+#finalResultSection {
+  margin-top: 25px;
+  background: rgba(0, 30, 0, 0.35);
+  border: 2px solid rgba(0, 255, 70, 0.4);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 6px;
+  padding: 30px;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  box-shadow:
+    0 0 12px rgba(0, 255, 70, 0.2),
+    inset 0 0 12px rgba(0, 255, 70, 0.2);
+  animation: popIn 0.5s ease-out;
+}
+
+#finalResultSection h2 {
+  color: #9aff9a;
+  text-shadow: 0 0 5px rgba(0, 255, 70, 0.7);
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 18px;
+  border-bottom: 2px solid rgba(0, 255, 70, 0.3);
+  padding-bottom: 10px;
+}
+
+.result-content p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #7bff7b;
+  margin: 10px 0;
+}
+
+#finalResultSection .terminal-btn {
+  margin-top: 20px;
+  width: auto;
+  padding: 15px 30px;
+}
+
+@keyframes popIn {
+  0% { opacity: 0; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.status-message {
+  margin-top: 15px;
+  font-size: 10px;
+  text-align: center;
+  min-height: 1.5em; /* Keeps space so layout doesn't jump */
+  text-shadow: 0 0 4px rgba(0, 255, 70, 0.4);
+}
+
+.status-success {
+  color: #7bff7b; /* Standard Terminal Green */
+}
+
+.status-error {
+  color: #ff7b7b; /* Terminal Red/Alert */
+  text-shadow: 0 0 4px rgba(255, 70, 70, 0.6);
 }

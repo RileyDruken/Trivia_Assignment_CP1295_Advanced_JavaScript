@@ -2,12 +2,16 @@ export class question {
     question = null;
     options = [];
     answer = null;
-    pointValue = null;
+    pointValue = 1;
     constructor(question,options,answer,pointValue) {
         this.question = question;
         this.options = options;
         this.answer = answer;
         this.pointValue = pointValue;
+    }
+
+    isAnswer(selected) {
+        return selected == this.answer;
     }
 }
 
