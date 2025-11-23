@@ -1,7 +1,7 @@
 import { question, generateQuestion } from "./questions_lib.js";
 
 document.addEventListener("DOMContentLoaded", (evt) => {
-  
+
   // I feel there is a better way to do this FIXME:
   let questions = []
 
@@ -23,7 +23,9 @@ document.addEventListener("DOMContentLoaded", (evt) => {
   questions.push(new question("In Fallout: New Vegas, which casino is controlled by The Chairmen?", ["The Tops", "Gomorrah", "Ultra-Luxe", "Bison Steve"], "The Tops", 1))
 
   let gameQuestions = generateQuestion(questions);
-  let correctQuestions = 0;
+  let score = 0;
+  let correctQuestion = 0;
+  let wrongQuestion = 0;
 
   function nextQuestion() {
     let title = document.getElementById("questionTitle")
@@ -31,39 +33,47 @@ document.addEventListener("DOMContentLoaded", (evt) => {
     title.textContent = "";
     answerList.textContent = "";
 
-    let currentQuestion = gameQuestions[Math.floor(Math.random() * gameQuestions.length)];
+    if (gameQuestions.length > 0) {
+      let currentQuestion = gameQuestions[Math.floor(Math.random() * gameQuestions.length)];
 
-    gameQuestions = gameQuestions.filter((curQuestion) => curQuestion != currentQuestion);
+      gameQuestions = gameQuestions.filter((curQuestion) => curQuestion != currentQuestion);
 
-    title.textContent = currentQuestion.question;
+      title.textContent = currentQuestion.question;
 
-    currentQuestion.options.forEach(element => {
-      let questionItem = document.createElement("li")
-      let button = document.createElement("button");
+      currentQuestion.options.forEach(element => {
+        let questionItem = document.createElement("li")
+        let button = document.createElement("button");
 
-      button.setAttribute("Class", "answerButton");
-      button.textContent = element;
-      button.value = element;
+        button.setAttribute("Class", "answerButton");
+        button.textContent = element;
+        button.value = element;
 
-      questionItem.appendChild(button)
-      answerList.appendChild(questionItem)
-    });
-    document.querySelectorAll("#answerList li button").forEach(element => {
-    element.addEventListener("click", (evt) => {
-      console.log(currentQuestion.isAnswer(element.value))
-      console.log(element.value,"|",currentQuestion.answer)
-      if (currentQuestion.isAnswer(element.value)) {
-        correctQuestions += 1;
-        nextQuestion(questions);
-      } else {
-        nextQuestion(questions);
-      }
+        questionItem.appendChild(button)
+        answerList.appendChild(questionItem)
+      });
+      document.querySelectorAll("#answerList li button").forEach(element => {
+        element.addEventListener("click", (evt) => {
+          console.log(currentQuestion.isAnswer(element.value))
+          console.log(element.value, "|", currentQuestion.answer)
+          if (currentQuestion.isAnswer(element.value)) {
+            score += currentQuestion.pointValue;
+            correctQuestion += 1;
+            nextQuestion(questions);
+          } else {
+            wrongQuestion += 1;
+            nextQuestion(questions);
+          }
+        
+          console.log(gameQuestions.length)
+          if (gameQuestions.length <= 0) {
+            document.getElementById("finalResultSection").className = "";
+            document.getElementById("scoreValue").textContent = score;
+          }
+        })
+      });
+    }
 
-      if (gameQuestions < 1) {
-        document.getElementById("scoreValue").textContent = correctQuestions;
-      }
-    })
-  });
+
   }
   nextQuestion(questions);
 
