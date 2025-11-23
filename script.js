@@ -81,19 +81,11 @@ document.addEventListener("DOMContentLoaded", (evt) => {
     let correctAnswer = document.getElementById("correctAnswer").value
     let submissionStatus =  document.getElementById("submissionStatus");
 
-    console.log(newQuestionText)
-    console.log(opt1)
-    console.log(opt2)
-    console.log(opt3)
-    console.log(opt4)
-    console.log(correctAnswer)
-
     let questionToAdd = new question(newQuestionText, [opt1, opt2, opt3, opt4], correctAnswer, 1);
     let duplicateFound = false;
 
     for (let index = 0; index < questions.length; index++) {
       if (JSON.stringify(questionToAdd) == JSON.stringify(questions[index])) {
-        console.log("duplicate Found")
         duplicateFound = true;
         break
       }
