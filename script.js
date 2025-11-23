@@ -77,6 +77,18 @@ document.addEventListener("DOMContentLoaded", (evt) => {
   })
   generateCard()
   
+  document.getElementById("restartButton").addEventListener("click", () => {
+      gameQuestions = generateQuestion(questions);
+      score = 0;
+      correctQuestion = 0;
+      wrongQuestion = 0;
+      title = document.getElementById("questionTitle")
+      answerList = document.getElementById("answerList")
+      currentQuestion = null;
+      title.textContent = "";
+      document.getElementById("finalResultSection").className = "hidden";
+      generateCard()
+  })
 
 
 
