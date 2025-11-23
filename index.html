@@ -22,32 +22,56 @@
 
       <h1>Fallout Trivia</h1> 
 
-      <!-- SCORE DISPLAY -->
       <div id="scoreBox">
         SCORE: <span id="scoreValue">0</span>
       </div>
 
-      <!-- IMAGE + CARD LAYOUT -->
       <div id="layoutRow">
 
-        <!-- Left Image -->
         <div class="sideImageBox">
-          <img id="leftImage" src="" alt="Left image placeholder">
+          <img id="leftImage" src="assets/vaultboy_left.png" alt="Vauly Boy" onerror="this.style.display='none'">
         </div>
 
-        <!-- Trivia Card -->
         <div id="triviaCard">
-          <h2 id="questionTitle">Question Title Placeholder</h2>
+          <h2 id="questionTitle">Loading Data...</h2>
           <ul id="answerList">
-            <!-- Question go here -->
-          </ul>
+            </ul>
         </div>
 
-        <!-- Right Image -->
         <div class="sideImageBox">
-          <img id="rightImage" src="" alt="Right image placeholder">
+          <img id="rightImage" src="assets/ranger_right.png" alt="NCR Ranger" onerror="this.style.display='none'">
         </div>
 
+      </div>
+
+      <div id="addQuestionContainer">
+        <h2>// DATABASE ENTRY: NEW DATA</h2>
+        <form id="addQuestionForm">
+          <div class="form-group">
+            <label for="newQuestionText">QUERY TEXT:</label>
+            <input type="text" id="newQuestionText" placeholder="Enter question..." required>
+          </div>
+          
+          <div class="form-group">
+            <label>OPTIONS:</label>
+            <input type="text" id="opt1" placeholder="Option 1" required>
+            <input type="text" id="opt2" placeholder="Option 2" required>
+            <input type="text" id="opt3" placeholder="Option 3" required>
+            <input type="text" id="opt4" placeholder="Option 4" required>
+          </div>
+
+          <div class="form-group">
+            <label for="correctAnswer">CORRECT ANSWER:</label>
+            <select id="correctAnswer">
+              <option value="1">Option 1</option>
+              <option value="2">Option 2</option>
+              <option value="3">Option 3</option>
+              <option value="4">Option 4</option>
+            </select>
+          </div>
+
+          <button type="submit" class="terminal-btn">SUBMIT DATA</button>
+        </form>
       </div>
 
     </main>

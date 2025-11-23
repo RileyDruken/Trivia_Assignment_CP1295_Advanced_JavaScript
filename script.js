@@ -1,8 +1,11 @@
 import { question, generateQuestion } from "./questions_lib.js";
 
 document.addEventListener("DOMContentLoaded", (evt) => {
+  
   // I feel there is a better way to do this FIXME:
   let questions = []
+
+
   questions.push(new question("In Fallout: New Vegas, what is the name of the town where the Courier begins their journey after being dug out of a shallow grave?", ["Primm", "Novac", "Goodsprings", "Sloan"], "Goodsprings", 1))
   questions.push(new question("In Fallout: New Vegas, what was The Platinum Chip?", ["An Upgrade for Mr.House's Computers/Defense System", "An High Value Casinio Chip uses in the Atomic Wrangler", "An Upgrade for the Power Armour", "An map for the whole wasteland"], "An Upgrade for Mr.House's Computers/Defense System", 1))
   questions.push(new question("Where does Fallout 1 take place?", ["Navada", "Texas", "New Mexico", "Southern California"], "Southern California", 1))
@@ -55,12 +58,14 @@ document.addEventListener("DOMContentLoaded", (evt) => {
       } else {
         nextQuestion(questions);
       }
+
+      if (gameQuestions < 1) {
+        document.getElementById("scoreValue").textContent = correctQuestions;
+      }
     })
   });
   }
   nextQuestion(questions);
-  
-  
 
 
 });
