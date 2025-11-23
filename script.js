@@ -72,7 +72,23 @@ document.addEventListener("DOMContentLoaded", (evt) => {
   
   }
 
-  document.getElementById("addQuestionForm").addEventListener("click", (evt) => {
+  document.getElementById("qSubmit").addEventListener("click", (evt) => {
+    let newQuestionText = document.getElementById("newQuestionText").value
+    let opt1 = document.getElementById("opt1").value
+    let opt2 = document.getElementById("opt2").value
+    let opt3 = document.getElementById("opt3").value
+    let opt4 = document.getElementById("opt4").value
+    let correctAnswer = document.getElementById("correctAnswer").value
+
+    console.log(newQuestionText)
+    console.log(opt1)
+    console.log(opt2)
+    console.log(opt3)
+    console.log(opt4)
+    console.log(correctAnswer)
+    questions.push(new question(newQuestionText, [opt1, opt2, opt3, opt4], correctAnswer, 1))
+
+    
     
   })
 
