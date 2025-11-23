@@ -30,10 +30,11 @@ document.addEventListener("DOMContentLoaded", (evt) => {
   let answerList = document.getElementById("answerList")
   let currentQuestion;
   title.textContent = "";
-  answerList.textContent = "";
+  
 
 
   function generateCard() {
+    answerList.textContent = "";
     currentQuestion = gameQuestions[Math.floor(Math.random() * gameQuestions.length)];
     gameQuestions = gameQuestions.filter((curQuestion) => curQuestion != currentQuestion);
     title.textContent = currentQuestion.question;
@@ -45,27 +46,32 @@ document.addEventListener("DOMContentLoaded", (evt) => {
       button.textContent = element;
       button.value = element;
 
-      questionItem.appendChild(button)
-      answerList.appendChild(questionItem)
-    });
-  }
-  generateCard()
-  
-  document.querySelectorAll("#answerList li button").forEach(element => {
-      element.addEventListener("click", (evt) => {
-        if (currentQuestion.isAnswer(element.value)) {
+      button.addEventListener("click", (evt) => {
+        if (currentQuestion.isAnswer(button.value)) {
           score += currentQuestion.pointValue;
           correctQuestion += 1;
         } else {
           wrongQuestion += 1;
         }
+        if (gameQuestions.length > 0) {
+          generateCard()
+        } else {
+          title.textContent = "WELCOME TO ROBCO INDUSTRIES (TM)\nTERMLINK"
+          answerList.textContent = "";
+          document.getElementById("finalResultSection").className = "";
+          document.getElementById("scoreValue").textContent = score;
+        }
       })
+      questionItem.appendChild(button)
+      answerList.appendChild(questionItem)
     });
 
-  // if (document.getElementById("answerList").textContent == "") {
-  //         document.getElementById("finalResultSection").className = "";
-  //         document.getElementById("scoreValue").textContent = score;
-  // }
+  
+  }
+  generateCard()
+  
+
+
 
 
 });
