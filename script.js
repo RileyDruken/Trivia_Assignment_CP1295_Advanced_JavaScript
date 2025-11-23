@@ -59,8 +59,11 @@ document.addEventListener("DOMContentLoaded", (evt) => {
           title.textContent = "WELCOME TO ROBCO INDUSTRIES (TM)\nTERMLINK"
           answerList.textContent = "";
           document.getElementById("finalResultSection").className = "";
-          document.getElementById("scoreValue").textContent = score;
+          document.getElementById("finalScoreCount").textContent = correctQuestion;
+          document.getElementById("finalScoreLoss").textContent = wrongQuestion;
         }
+        document.getElementById("scoreValue").textContent = score;
+
       })
       questionItem.appendChild(button)
       answerList.appendChild(questionItem)
