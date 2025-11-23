@@ -26,56 +26,46 @@ document.addEventListener("DOMContentLoaded", (evt) => {
   let score = 0;
   let correctQuestion = 0;
   let wrongQuestion = 0;
-
-  function nextQuestion() {
-    let title = document.getElementById("questionTitle")
-    let answerList = document.getElementById("answerList")
-    title.textContent = "";
-    answerList.textContent = "";
-
-    if (gameQuestions.length > 0) {
-      let currentQuestion = gameQuestions[Math.floor(Math.random() * gameQuestions.length)];
-
-      gameQuestions = gameQuestions.filter((curQuestion) => curQuestion != currentQuestion);
-
-      title.textContent = currentQuestion.question;
-
-      currentQuestion.options.forEach(element => {
-        let questionItem = document.createElement("li")
-        let button = document.createElement("button");
-
-        button.setAttribute("Class", "answerButton");
-        button.textContent = element;
-        button.value = element;
-
-        questionItem.appendChild(button)
-        answerList.appendChild(questionItem)
-      });
-      document.querySelectorAll("#answerList li button").forEach(element => {
-        element.addEventListener("click", (evt) => {
-          console.log(currentQuestion.isAnswer(element.value))
-          console.log(element.value, "|", currentQuestion.answer)
-          if (currentQuestion.isAnswer(element.value)) {
-            score += currentQuestion.pointValue;
-            correctQuestion += 1;
-            nextQuestion(questions);
-          } else {
-            wrongQuestion += 1;
-            nextQuestion(questions);
-          }
-        
-          console.log(gameQuestions.length)
-          if (gameQuestions.length <= 0) {
-            document.getElementById("finalResultSection").className = "";
-            document.getElementById("scoreValue").textContent = score;
-          }
-        })
-      });
-    }
+  let title = document.getElementById("questionTitle")
+  let answerList = document.getElementById("answerList")
+  let currentQuestion;
+  title.textContent = "";
+  answerList.textContent = "";
 
 
+  function generateCard() {
+    currentQuestion = gameQuestions[Math.floor(Math.random() * gameQuestions.length)];
+    gameQuestions = gameQuestions.filter((curQuestion) => curQuestion != currentQuestion);
+    title.textContent = currentQuestion.question;
+    currentQuestion.options.forEach(element => {
+      let questionItem = document.createElement("li")
+      let button = document.createElement("button");
+
+      button.setAttribute("Class", "answerButton");
+      button.textContent = element;
+      button.value = element;
+
+      questionItem.appendChild(button)
+      answerList.appendChild(questionItem)
+    });
   }
-  nextQuestion(questions);
+  generateCard()
+  
+  document.querySelectorAll("#answerList li button").forEach(element => {
+      element.addEventListener("click", (evt) => {
+        if (currentQuestion.isAnswer(element.value)) {
+          score += currentQuestion.pointValue;
+          correctQuestion += 1;
+        } else {
+          wrongQuestion += 1;
+        }
+      })
+    });
+
+  // if (document.getElementById("answerList").textContent == "") {
+  //         document.getElementById("finalResultSection").className = "";
+  //         document.getElementById("scoreValue").textContent = score;
+  // }
 
 
 });
