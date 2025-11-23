@@ -75,6 +75,7 @@ document.addEventListener("DOMContentLoaded", (evt) => {
   document.getElementById("addQuestionForm").addEventListener("click", (evt) => {
     evt.preventDefault()
   })
+
   generateCard()
   
   document.getElementById("restartButton").addEventListener("click", () => {
@@ -86,6 +87,7 @@ document.addEventListener("DOMContentLoaded", (evt) => {
       answerList = document.getElementById("answerList")
       currentQuestion = null;
       title.textContent = "";
+      document.getElementById("scoreValue").textContent = score;
       document.getElementById("finalResultSection").className = "hidden";
       generateCard()
   })
