@@ -71,6 +71,10 @@ document.addEventListener("DOMContentLoaded", (evt) => {
 
   
   }
+
+  document.getElementById("addQuestionForm").addEventListener("click", (evt) => {
+    evt.preventDefault()
+  })
   generateCard()
   
 
