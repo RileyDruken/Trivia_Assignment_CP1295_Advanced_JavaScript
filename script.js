@@ -84,6 +84,12 @@ document.addEventListener("DOMContentLoaded", (evt) => {
     let questionToAdd = new question(newQuestionText, [opt1, opt2, opt3, opt4], correctAnswer, 1);
     let duplicateFound = false;
 
+    document.getElementById("newQuestionText").value = ""
+    document.getElementById("opt1").value = "";
+    document.getElementById("opt2").value = "";
+    document.getElementById("opt3").value = "";
+    document.getElementById("opt4").value = "";
+
     for (let index = 0; index < questions.length; index++) {
       if (JSON.stringify(questionToAdd) == JSON.stringify(questions[index])) {
         duplicateFound = true;
