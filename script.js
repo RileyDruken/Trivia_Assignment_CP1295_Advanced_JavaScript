@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", (evt) => {
     let opt3 = document.getElementById("opt3").value
     let opt4 = document.getElementById("opt4").value
     let correctAnswer = document.getElementById("correctAnswer").value
-
+    console.log(opt1 == "")
     let submissionStatus =  document.getElementById("submissionStatus");
 
     let questionToAdd = new question(newQuestionText, [opt1, opt2, opt3, opt4], document.getElementById(`opt${correctAnswer}`).value, 1);
@@ -91,7 +91,10 @@ document.addEventListener("DOMContentLoaded", (evt) => {
         break
       }
     }
-    if (!duplicateFound) {
+    if(opt1 == "" || opt2 == "" || opt3 == "" || opt4 == "" || newQuestionText ==  "") {
+      submissionStatus.textContent = "All fields must be filled";
+    }
+    else if(!duplicateFound) {
       questions.push(questionToAdd)
       submissionStatus.textContent = "Question Added";
     } else {
