@@ -79,9 +79,10 @@ document.addEventListener("DOMContentLoaded", (evt) => {
     let opt3 = document.getElementById("opt3").value
     let opt4 = document.getElementById("opt4").value
     let correctAnswer = document.getElementById("correctAnswer").value
+
     let submissionStatus =  document.getElementById("submissionStatus");
 
-    let questionToAdd = new question(newQuestionText, [opt1, opt2, opt3, opt4], correctAnswer, 1);
+    let questionToAdd = new question(newQuestionText, [opt1, opt2, opt3, opt4], document.getElementById(`opt${correctAnswer}`).value, 1);
     let duplicateFound = false;
 
     for (let index = 0; index < questions.length; index++) {
